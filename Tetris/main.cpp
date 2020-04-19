@@ -1,6 +1,9 @@
-int main(void) {
+//SFML Tetris
+//initial github repro setup
+int main(void) 
+{
+    
 
 
-
-    return 1;
+    return 0;
 }
