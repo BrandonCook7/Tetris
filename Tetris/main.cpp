@@ -1,9 +1,8 @@
-//SFML Tetris
-//initial github repro setup
-int main(void) 
-{
-    
+#include <iostream>
 
+int main(void) {
 
-    return 0;
+    std::cout << "Hello World";
+
+    return 1;
 }
