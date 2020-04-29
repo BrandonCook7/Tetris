@@ -1,3 +1,3 @@
 # Tetris
-PA8 Assignment for Cpts 122 @ WSU
+PA9 Assignment for Cpts 122 @ WSU
 
