@@ -1,6 +1,23 @@
-
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+
+int grid[20][10] = {0};
+
+typedef struct coordinate {
+    int x;
+    int y;
+} Coordinate;
+
+// Create block shapes using 4x4 coordinate grid. Starts at {0,0} top left and ends at {3,3} bottom right.
+Coordinate shapes[7][4] = {
+    {{1,0},{1,1},{1,2},{1,3}}, // I
+    {{0,1},{1,1},{0,2},{1,2}}, // O (square)
+    {{1,1},{2,1},{0,2},{1,2}}, // S
+    {{0,1},{1,1},{1,2},{2,2}}, // Z
+    {{1,0},{1,1},{1,2},{2,2}}, // L
+    {{1,0},{1,1},{0,2},{1,2}}, // J
+    {{0,1},{1,1},{2,1},{1,2}}  // T
+};
 
 int main()
 {
@@ -24,7 +41,6 @@ int main()
     
     sf::Sprite red(block);
     red.setColor(sf::Color(255,0,0));
-    
     
     
     sf::Texture background;
@@ -64,7 +80,7 @@ int main()
         // Clear screen
         window.clear(sf::Color::White);
 
-        // Draw the sprite
+        // Draw the sprites
         
         sprite.setPosition(42, 42); //board is 10 px in on each side
         red.setPosition(10,10);
