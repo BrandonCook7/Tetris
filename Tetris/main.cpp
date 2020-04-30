@@ -28,15 +28,16 @@ int main() {
 
     // Load block texture and sprites
     sf::Texture blockTexture;
-    if (!blockTexture.loadFromFile("images/block.jpg")) {
+    if (!blockTexture.loadFromFile("images/blocks.jpg")) {
         return EXIT_FAILURE;
     }
+    blockTexture.setSmooth(true);
     
     sf::Sprite green(blockTexture);
-    green.setColor(sf::Color(0,255,0));
+    green.setTextureRect(sf::IntRect(64,0,32,32));
     
     sf::Sprite red(blockTexture);
-    red.setColor(sf::Color(255,0,0));
+    red.setTextureRect(sf::IntRect(96,0,32,32)); // to change color, change first value of IntRect by 32
     
     // Load grid texture and sprite
     sf::Texture gridTexture;
