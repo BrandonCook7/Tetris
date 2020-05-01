@@ -25,7 +25,7 @@ public:
 	tetris();
     bool checkWin();
     bool checkBounds();
-    bool checkLines();
+    void checkLines();
     void rotate();
     void displayScore();
 
