@@ -3,7 +3,7 @@
 #include <ctime>
 
 #include <iostream>
-
+void menu(sf::RenderWindow& window);
 
 typedef struct coordinate {
     int x;
@@ -11,9 +11,6 @@ typedef struct coordinate {
 } Coordinate;
 
 int main() {
-    
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 800), "Tetris");
 
     // Create block shapes using 4x4 coordinate grid. Starts at {0,0} top left and ends at {3,3} bottom right.
     Coordinate shapes[7][4] = {
@@ -129,15 +126,21 @@ int main() {
         }
         
         window.draw(text);
-
+        menu(window);
         window.display(); // Update the window
     }
 
     return 0;
 }
-void menu(sf::RenderWindow window) {
-    sf::Sprite sprite;
-    sprite.setTextureRect(sf::IntRect(10, 10, 32, 32));
-    window.draw(sprite);
-    window.display();
+void menu(sf::RenderWindow& window) {
+
+    sf::Font font;
+    font.loadFromFile("Roboto-Regular.ttf");
+    sf::Text menuText("Menu", font, 100);
+
+    menuText.setFillColor(sf::Color::Black);
+    menuText.setPosition(300, 100);
+
+    window.draw(menuText);
+
 }
