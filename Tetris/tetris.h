@@ -1,5 +1,7 @@
-#include "game.h"
+#ifndef tetris_h
+#define tetris_h
 
+#include "game.h"
 
 class tetris: public game
 {
@@ -34,3 +36,5 @@ public:
     void spawn(Sprite sprite);
     void displayScore();
 };
+
+#endif /* tetris_hpp */

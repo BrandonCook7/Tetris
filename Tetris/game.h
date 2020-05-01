@@ -1,3 +1,6 @@
+#ifndef game_h
+#define game_h
+
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
@@ -29,3 +32,4 @@ public:
 	void setLevel();
 };
 
+#endif /* game_hpp */
