@@ -142,3 +142,8 @@ void tetris::spawn(Sprite sprite) {
         hasSpawned = 1;
     }
 }
+
+bool tetris::checkWin() {
+    
+    return true;
+}
