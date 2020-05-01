@@ -1,5 +1,8 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <ctime>
+
+#include <iostream>
 
 
 typedef struct coordinate {
@@ -29,9 +32,11 @@ int main() {
     int move = 0; // determines which direction to move
     bool rotate = false;
     
+    srand( (unsigned) time(NULL));
+    int randNum = 0;
+    int tempNum = 0;
+    
     sf::RenderWindow window(sf::VideoMode(800, 800), "Tetris");
-    
-    
     
     // Load textures and sprites
     
@@ -41,8 +46,6 @@ int main() {
     }
     blockTexture.setSmooth(true);
     sf::Sprite sprite(blockTexture);
-    sprite.setTextureRect(sf::IntRect(96,0,32,32)); // to change color, change first value of IntRect by 32 (each block is 32x32). Max value is 224.
-    
     
     sf::Texture gridTexture;
     if (!gridTexture.loadFromFile("images/grid.jpg")) {
@@ -99,10 +102,17 @@ int main() {
             }
         }
         
-        if(block[0].x == 0) // make sure block only set to tetris shape when it first spawns in
-        for(int i = 0; i < 4; i++) {
-            block[i].x = shapes[1][i].x;
-            block[i].y = shapes[1][i].y;
+        // Determine which block and set block array to hold its 4 coordinates
+        if(tempNum == 0) { // make sure block only set to tetris shape when it first spawns in
+            randNum = rand() % 7;
+            std::cout << randNum << "\n";
+            sprite.setTextureRect(sf::IntRect(randNum * 32,0,32,32)); // // set color of sprite.
+            for(int i = 0; i < 4; i++) {
+                block[i].x = shapes[randNum][i].x;
+                block[i].y = shapes[randNum][i].y;
+            }
+            
+            tempNum = 1;
         }
         
         move = 0;
@@ -111,8 +121,8 @@ int main() {
         // Clear screen
         window.clear(sf::Color::White);
         window.draw(gridSprite);
-
-        // Sets sprite to be each block in I and draws it to screen.
+        
+        // Draw the sprite in correct spot
         for(int i = 0; i < 4; i++) {
             sprite.setPosition(block[i].x * 32, block[i].y * 32); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
             window.draw(sprite);
