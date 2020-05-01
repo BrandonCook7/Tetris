@@ -1,15 +1,22 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
+
 typedef struct coordinate {
     int x;
     int y;
 } Coordinate;
 
+void menu(sf::RenderWindow window);
+
+
 int main() {
     
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(800, 800), "Tetris");
+
+    menu(window);
+
 
     // Create block shapes using 4x4 coordinate grid. Starts at {0,0} top left and ends at {3,3} bottom right.
     Coordinate shapes[7][4] = {
@@ -100,4 +107,10 @@ int main() {
     }
 
     return 0;
+}
+void menu(sf::RenderWindow window) {
+    sf::Sprite sprite;
+    sprite.setTextureRect(sf::IntRect(10, 10, 32, 32));
+    window.draw(sprite);
+    window.display();
 }
