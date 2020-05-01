@@ -10,10 +10,21 @@ typedef struct coordinate {
     int y;
 } Coordinate;
 
-int main() {
+//bool valid(Coordinate arr[4], int grid[][10]) {
+//    for(int i = 0; i < 4; i++) {
+//        if(arr[i].x < 0 || arr[i].x >= 10 || arr[i].y >= 20) {
+//            return 0;
+//        } else if(grid[arr[i].y][arr[i].x]) {
+//            return 0;
+//        }
+//    }
+//
+//    return 1;
+//}
 
-    // Create block shapes using 4x4 coordinate grid. Starts at {0,0} top left and ends at {3,3} bottom right.
-    Coordinate shapes[7][4] = {
+int main() {
+    
+    Coordinate shapes[7][4] = { // Creates block shapes using a 4x4 coordinate grid. Top left is {0,0}, bottom right is {3,3}
         {{1,0},{1,1},{1,2},{1,3}}, // I
         {{0,1},{1,1},{0,2},{1,2}}, // O (square)
         {{1,1},{2,1},{0,2},{1,2}}, // S
@@ -31,7 +42,7 @@ int main() {
     
     srand( (unsigned) time(NULL));
     int randNum = 0;
-    int tempNum = 0;
+    int hasSpawned = 0;
     
     sf::RenderWindow window(sf::VideoMode(800, 800), "Tetris");
     
@@ -100,7 +111,7 @@ int main() {
         }
         
         // Determine which block and set block array to hold its 4 coordinates
-        if(tempNum == 0) { // make sure block only set to tetris shape when it first spawns in
+        if(hasSpawned == 0) { // make sure block only set to tetris shape when it first spawns in
             randNum = rand() % 7;
             std::cout << randNum << "\n";
             sprite.setTextureRect(sf::IntRect(randNum * 32,0,32,32)); // // set color of sprite.
@@ -109,7 +120,7 @@ int main() {
                 block[i].y = shapes[randNum][i].y;
             }
             
-            tempNum = 1;
+            hasSpawned = 1;
         }
         
         move = 0;
@@ -121,7 +132,7 @@ int main() {
         
         // Draw the sprite in correct spot
         for(int i = 0; i < 4; i++) {
-            sprite.setPosition(block[i].x * 32, block[i].y * 32); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
+            sprite.setPosition(block[i].x * 32 + 10 + 96, block[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
             window.draw(sprite);
         }
         
@@ -132,6 +143,7 @@ int main() {
 
     return 0;
 }
+
 void menu(sf::RenderWindow& window) {
 
     sf::Font font;
