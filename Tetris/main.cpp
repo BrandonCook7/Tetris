@@ -6,13 +6,21 @@ typedef struct coordinate {
     int y;
 } Coordinate;
 
+//bool valid(Coordinate arr[4], int grid[][10]) {
+//    for(int i = 0; i < 4; i++) {
+//        if(arr[i].x < 0 || arr[i].x >= 10 || arr[i].y >= 20) {
+//            return 0;
+//        } else if(grid[arr[i].y][arr[i].x]) {
+//            return 0;
+//        }
+//    }
+//
+//    return 1;
+//}
+
 int main() {
     
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 800), "Tetris");
-
-    // Create block shapes using 4x4 coordinate grid. Starts at {0,0} top left and ends at {3,3} bottom right.
-    Coordinate shapes[7][4] = {
+    Coordinate shapes[7][4] = { // Creates block shapes using a 4x4 coordinate grid. Top left is {0,0}, bottom right is {3,3}
         {{1,0},{1,1},{1,2},{1,3}}, // I
         {{0,1},{1,1},{0,2},{1,2}}, // O (square)
         {{1,1},{2,1},{0,2},{1,2}}, // S
@@ -21,25 +29,28 @@ int main() {
         {{1,0},{1,1},{0,2},{1,2}}, // J
         {{0,1},{1,1},{2,1},{1,2}}  // T
     };
-
-    Coordinate block[4]; // used to hold the 4 coordinates of a block
-
+    
+    Coordinate block[4] = {0}; // holds the 4 coordinates of a block
     int grid[20][10] = {0};
-
-    // Load block texture and sprites
+    
+    int move = 0; // determines which direction to move
+    bool rotate = false;
+    
+    sf::RenderWindow window(sf::VideoMode(800, 800), "Tetris");
+    
+    
+    
+    // Load textures and sprites
+    
     sf::Texture blockTexture;
-    if (!blockTexture.loadFromFile("images/blocks.jpg")) {
+    if (!blockTexture.loadFromFile("images/blocks.jpg")) { // Image has 7 blocks of different color. Tried using just a grey scale image and setColor, but it made blocks too dark. This way allows us to change color by changing what part of the image a sprite uses
         return EXIT_FAILURE;
     }
     blockTexture.setSmooth(true);
+    sf::Sprite sprite(blockTexture);
+    sprite.setTextureRect(sf::IntRect(96,0,32,32)); // to change color, change first value of IntRect by 32 (each block is 32x32). Max value is 224.
     
-    sf::Sprite green(blockTexture);
-    green.setTextureRect(sf::IntRect(64,0,32,32));
     
-    sf::Sprite red(blockTexture);
-    red.setTextureRect(sf::IntRect(96,0,32,32)); // to change color, change first value of IntRect by 32
-    
-    // Load grid texture and sprite
     sf::Texture gridTexture;
     if (!gridTexture.loadFromFile("images/grid.jpg")) {
         return EXIT_FAILURE;
@@ -47,7 +58,9 @@ int main() {
     sf::Sprite gridSprite(gridTexture);
     
     
-    // Create text to display
+    
+    // Create text
+    
     sf::Font font;
     if (!font.loadFromFile("Roboto-Regular.ttf")) {
         return EXIT_FAILURE;
@@ -56,8 +69,7 @@ int main() {
     text.setFillColor(sf::Color::Black);
     text.setPosition(400, 32);
 
-    // Start the game loop
-    while (window.isOpen()) {
+    while (window.isOpen()) { // Starts game loop
         
         // Process events
         sf::Event event;
@@ -68,35 +80,54 @@ int main() {
                 window.close();
             }
 
-            // Escape pressed: exit
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                window.close();
+            if (event.type == sf::Event::KeyPressed) {
+                if(event.key.code == sf::Keyboard::Escape) window.close();
+                if(event.key.code == sf::Keyboard::Left) move = -1;
+                if(event.key.code == sf::Keyboard::Right) move = 1;
+                if(event.key.code == sf::Keyboard::Up) rotate = true;
             }
         }
+        
+        // Move
+        for(int i = 0; i < 4; i++) {
+            block[i].x += move;
+        }
+        
+        // Rotate
+        if(rotate) { // need to add case preventing square block from being rotated
+            
+            Coordinate temp = block[1];
+            
+            for(int i = 0; i < 4; i++) {
+                int x = block[i].y - temp.y;
+                int y = block[i].x - temp.x;
+                block[i].x = temp.x - x;
+                block[i].y = temp.y + y;
+            }
+        }
+        
+        if(block[0].x == 0) // make sure block only set to tetris shape when it first spawns in
+        for(int i = 0; i < 4; i++) {
+            block[i].x = shapes[1][i].x;
+            block[i].y = shapes[1][i].y;
+        }
+        
+        move = 0;
+        rotate = false;
 
         // Clear screen
         window.clear(sf::Color::White);
-        
-        // Test code. Delete later. Sets block to be I
-        for(int i = 0; i < 4; i++) {
-            block[i].x = shapes[0][i].x;
-            block[i].y = shapes[0][i].y;
-        }
-        
         window.draw(gridSprite);
-        
-        // Test code. Delete later. Sets red sprite to be each block in I and draws it to screen.
+
+        // Sets sprite to be each block in I and draws it to screen.
         for(int i = 0; i < 4; i++) {
-            red.setPosition(10 + block[i].x * 32, 10 + block[i].y * 32); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
-            window.draw(red);
+            sprite.setPosition(block[i].x * 32, block[i].y * 32); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
+            window.draw(sprite);
         }
         
-
-        // Draw the text
         window.draw(text);
 
-        // Update the window
-        window.display();
+        window.display(); // Update the window
     }
 
     return 0;
