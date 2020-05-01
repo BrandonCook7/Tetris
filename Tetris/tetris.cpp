@@ -7,13 +7,71 @@ tetris::tetris()
     float timer = 0; // timer
     float delay = 0.3; // delay in milliseconds
     Clock clock; // clock
+    
+    hasSpawned = 0;
+    
+    // Load textures and sprites
+    
+    // Blocks.jpg has 7 blocks of different color. Tried using just a grey scale image and setColor, but it made blocks too dark. This way allows us to change color by changing what part of the image a sprite uses
+    
+    Texture blockTexture;
+    if (!blockTexture.loadFromFile("images/blocks.jpg")) {
+        return EXIT_FAILURE;
+    }
+    blockTexture.setSmooth(true);
+    Sprite sprite(blockTexture);
+    
+    Texture gridTexture;
+    if (!gridTexture.loadFromFile("images/grid.jpg")) {
+        return EXIT_FAILURE;
+    }
+    Sprite gridSprite(gridTexture);
+    
+    
+    /* Text code. Move somewhere later
+     
+     sf::Font font;
+    if (!font.loadFromFile("Roboto-Regular.ttf")) {
+        return EXIT_FAILURE;
+    }
+    sf::Text text("Hello SFML", font, 50);
+    text.setFillColor(sf::Color::Black);
+    text.setPosition(400, 32);
+
+     
+     */
+    
+    
 
     while (window.isOpen())
     {
         float time = clock.getElapsedTime().asSeconds();
         clock.restart();
         timer += time;
+        
+        // Process events
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            
+            // Close window: exit
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+            
+            if (event.type == sf::Event::KeyPressed) {
+                if(event.key.code == sf::Keyboard::Escape) window.close();
+                if(event.key.code == sf::Keyboard::Left) dx = -1;
+                if(event.key.code == sf::Keyboard::Right) dx = 1;
+                if(event.key.code == sf::Keyboard::Up) needsRotation = true;
+            }
+        }
+        
+        move();
+        rotate();
+        spawn(sprite);
+        
     }
+    
 }
 
 bool tetris::checkBounds()
@@ -71,3 +129,16 @@ void tetris::move() {
     }
 }
 
+void tetris::spawn(Sprite sprite) {
+    
+    if(hasSpawned == 0) { // check if a block has been spawned already
+        int randNum = rand() % 7;
+        sprite.setTextureRect(sf::IntRect(randNum * 32,0,32,32)); // set color of sprite
+        for(int i = 0; i < 4; i++) {
+            current[i].x = shapes[randNum][i].x;
+            current[i].y = shapes[randNum][i].y;
+        }
+        
+        hasSpawned = 1;
+    }
+}

@@ -8,14 +8,14 @@ using namespace sf;
 typedef struct coordinate {
 	int x;
 	int y;
-}Coordinate;
+} Coordinate;
+
 class game
 {
 protected:
-	int gameState;//1 is normal, 0 is lost, 2 is win
-	int level;//indicates speed and points worth
-	int dx;//speed of horizontal movement
-	Coordinate block[4]; // used to hold the 4 coordinates of a block
+	int gameState; // 1 is normal, 0 is lost, 2 is win
+	int level; // indicates speed and points worth
+	int dx; // distance moved on x-axis
 public:
 	game();
 	~game();

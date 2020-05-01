@@ -5,6 +5,8 @@ class tetris: public game
 {
 private:
     int score;
+    bool needsRotation;
+    bool hasSpawned;
     float timer; // timer
     float delay; // delay in milliseconds
     Clock clock; // clock
@@ -20,8 +22,8 @@ private:
         {{1,0},{1,1},{0,2},{1,2}}, // J
         {{0,1},{1,1},{2,1},{1,2}}  // T
     };
-    Coordinate current[4], prev[4]; // keeps track of blocks current position and previous position
-
+    Coordinate current[4], prev[4]; // keeps track of block's current position and previous position
+    Coordinate block[4]; // holds the 4 coordinates of a block
 public:
 	tetris();
     bool checkWin();
@@ -29,5 +31,6 @@ public:
     void checkLines();
     void rotate();
     void move();
+    void spawn(Sprite sprite);
     void displayScore();
 };
