@@ -29,7 +29,7 @@ private:
     Coordinate current[4], prev[4]; // keeps track of block's current position and previous position
 public:
     tetris();
-    bool checkWin();
+    int checkWin();
     bool checkBounds();
     void checkLines();
     void rotate();

@@ -47,8 +47,13 @@ tetris::tetris()
         
         move();
         if(grid[1][1] != 0) { // game over. hit top part
+            gameState = 0;
+        }
+        
+        if(checkWin() == 0) {
             window.close();
         }
+        
         spawn(sprite);
         if (needsRotation && randNum != 1 && (current[0].x != 0 && current[1].x != 0 && current[2].x != 0 && current[3].x != 0 && current[0].x != 9 && current[1].x != 9 && current[2].x != 9 && current[3].x != 9)) rotate();
         if (timer > delay)
@@ -167,10 +172,11 @@ void tetris::spawn(Sprite& sprite) {
     }
 }
 
-bool tetris::checkWin() {
-    return true;
+int tetris::checkWin() {
+    return gameState;
 }
 
 void tetris::displayScore() {
     
 }
+

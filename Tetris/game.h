@@ -29,7 +29,7 @@ public:
 	~game() {
 
 	}
-	bool virtual checkWin() { // fix later
+	int virtual checkWin() { // fix later
 		return true;
 	}
 	void printWin(); // declares that the player won or lost
