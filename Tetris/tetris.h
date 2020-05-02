@@ -1,4 +1,3 @@
-
 #ifndef tetris_h
 #define tetris_h
 
@@ -7,7 +6,6 @@
 class tetris : public game
 {
 private:
-    int score;
     int randNum;
     int hasSpawned;
     bool needsRotation;
@@ -35,7 +33,8 @@ public:
     void rotate();
     void move();
     void spawn(Sprite& sprite);
-    void displayScore();
+    void displayScore(RenderWindow &window);
+    void displayFinalScore();
 };
 
 #endif /* tetris_hpp */
