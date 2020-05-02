@@ -7,8 +7,8 @@ tetris::tetris()
     timer = 0; // timer
     delay = 0.3; // delay in milliseconds
     Clock clock; // clock
-    hasSpawned = 0;
     int isSquare = 0;
+    hasSpawned = 0;
     // Load textures and sprites
     // Blocks.jpg has 7 blocks of different color. Tried using just a grey scale image and setColor, but it made blocks too dark. This way allows us to change color by changing what part of the image a sprite uses
     Texture blockTexture;
@@ -71,13 +71,7 @@ tetris::tetris()
         // Clear screen
         window.clear(Color::White);
         window.draw(gridSprite);
-     /*
-        // Draw the sprite in correct spot
-        for (int i = 0; i < 4; i++) {
-            sprite.setPosition(current[i].x * 32 + 10, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
-            window.draw(sprite);
-        }
-        */
+     
         for (int i = 0; i < 20; i++)
             for (int j = 0; j < 10; j++)
             {
@@ -87,12 +81,14 @@ tetris::tetris()
                 window.draw(sprite);
             }
 
-        for (int i = 0; i < 4; i++)
-        {
-            sprite.setTextureRect(IntRect(randNum * 32, 0, 32, 32));
-            sprite.setPosition(current[i].x * 32+10, current[i].y * 32+10);
+        // Draw the sprite in correct spot
+        for (int i = 0; i < 4; i++) {
+            sprite.setPosition(current[i].x * 32 + 10, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
             window.draw(sprite);
         }
+        
+
+
         // add display score here
         window.display(); // Update the window
     }

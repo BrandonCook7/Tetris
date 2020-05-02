@@ -1,3 +1,4 @@
+
 #ifndef game_h
 #define game_h
 
@@ -20,25 +21,25 @@ protected:
 	int level; // indicates speed and points worth
 	int dx; // distance moved on x-axis
 public:
-    game() {
-        level = 0;
-        dx = 0;
-        gameState = 1;
-    }
-    ~game() {
-        
-    }
-	void delay(int ms);
-	void move(Event event);
-    bool virtual checkWin() { // fix later
-        
-        return true;
-    }
-	void printWin();
-	int getdx();
-	void setdx();
-	int getLevel();
-	void setLevel();
+	game(){ //constructor
+		level = 0;//intializes game variables
+		dx = 0;
+		gameState = 1;
+	}
+	~game() {
+
+	}
+	bool virtual checkWin() { // fix later
+		return true;
+	}
+	void printWin(); // declares that the player won or lost
+	int getLevel() {
+		return level;
+	}
+	void setLevel(int l) {
+		level = l;
+	}
+	void virtual displayScore();
 };
 
 #endif /* game_hpp */
