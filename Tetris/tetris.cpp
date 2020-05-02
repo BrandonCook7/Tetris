@@ -46,6 +46,9 @@ tetris::tetris()
         }
         
         move();
+        if(grid[1][1] != 0) { // game over. hit top part
+            window.close();
+        }
         spawn(sprite);
         if (needsRotation && randNum != 1 && (current[0].x != 0 && current[1].x != 0 && current[2].x != 0 && current[3].x != 0 && current[0].x != 9 && current[1].x != 9 && current[2].x != 9 && current[3].x != 9)) rotate();
         if (timer > delay)
@@ -57,12 +60,6 @@ tetris::tetris()
             }
             if (!checkBounds()) // block has hit bottom
             {
-                
-                if(prev[0].x == current[0].x) {
-//                    window.close();
-                    cout << "test";
-                }
-                
                 for (int i = 0; i < 4; i++) {
                     current[i].y = prev[i].y;
                     grid[current[i].y][current[i].x] = randNum + 1;
