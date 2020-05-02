@@ -2,27 +2,27 @@
 #include "tetris.h"
 
 int main() {
-    
-    RenderWindow w(VideoMode(800, 800), "Tetris");
+
+    RenderWindow w(VideoMode(800, 800), "Main");//Creates Main Window
 
     Texture bg;
-    if (!bg.loadFromFile("images/tetris-bg-darker.jpg")) {
-        cout << "ERROR: Failed to load image tetris-bg\n";
+    if (!bg.loadFromFile("images/tetris-bg-darker.jpg")) {//Loads Tetris Menu Background
+        cout << "ERROR: Failed to load image tetris-bg\n";//If Failed Prints out error message
     }
     Sprite background(bg);
-    
+
     Font russianFont;
-    if(!russianFont.loadFromFile("Russian-Dollmaker.ttf")) {
+    if (!russianFont.loadFromFile("Russian-Dollmaker.ttf")) {//Loads 
         cout << "ERROR: Failed to load Russian-Dollmarker.ttf\n";
     }
-    
-    Text menuText("Tetris", russianFont, 200);
+
+    Text menuText("Tetris", russianFont, 200);//Creates menu text Title
 
     Text subText("Press Enter to Start", russianFont, 70);
     Text ruleHeader("Rules", russianFont, 60);
     Text rules("1. Use Arrow Keys to Move\n2. Don't let blocks touch top\n3. Blocks move faster each round\n", russianFont, 40);
 
-
+    //Sets all text color and position
     menuText.setFillColor(Color::White);
     menuText.setPosition(240, 70);
 
@@ -38,20 +38,21 @@ int main() {
     while (w.isOpen())
     {
         Event e;
-        while (w.pollEvent(e))
+        while (w.pollEvent(e))//Constantly checks for event
         {
-            if (e.type == Event::Closed || e.key.code == Keyboard::Enter)
+            if (e.type == Event::Closed || e.key.code == Keyboard::Enter)//If enter key is entered it closed the screen
                 w.close();
         }
 
         w.clear(Color::White);
+        //Draws text
         w.draw(background);
         w.draw(subText);
         w.draw(menuText);
         w.draw(ruleHeader);
         w.draw(rules);
-        
-        w.display();
+
+        w.display();//Displays all visuals
     }
 
     tetris test;
