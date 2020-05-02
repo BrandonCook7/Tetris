@@ -1,8 +1,11 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <ctime>
+#include "tetris.h"
 
 #include <iostream>
+
+/*
 void menu(sf::RenderWindow& window);
 
 typedef struct coordinate {
@@ -10,17 +13,17 @@ typedef struct coordinate {
     int y;
 } Coordinate;
 
-//bool valid(Coordinate arr[4], int grid[][10]) {
-//    for(int i = 0; i < 4; i++) {
-//        if(arr[i].x < 0 || arr[i].x >= 10 || arr[i].y >= 20) {
-//            return 0;
-//        } else if(grid[arr[i].y][arr[i].x]) {
-//            return 0;
-//        }
-//    }
-//
-//    return 1;
-//}
+bool valid(Coordinate arr[4], int grid[][10]) { // used to check if block has gone out of grid or would overlap another block
+    for(int i = 0; i < 4; i++) {
+        if(arr[i].x < 0 || arr[i].x >= 10 || arr[i].y >= 20) {
+            return 0;
+        } else if(grid[arr[i].y][arr[i].x]) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
 
 int main() {
     
@@ -148,11 +151,21 @@ void menu(sf::RenderWindow& window) {
 
     sf::Font font;
     font.loadFromFile("Roboto-Regular.ttf");
-    sf::Text menuText("Menu", font, 100);
+    sf::Text menuText("Menu", font, 50);
 
     menuText.setFillColor(sf::Color::Black);
-    menuText.setPosition(300, 100);
+    menuText.setPosition(400, 100);
 
     window.draw(menuText);
 
+}
+
+*/
+
+int main() {
+    
+    tetris test;
+    
+    
+    return 0;
 }

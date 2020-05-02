@@ -70,6 +70,24 @@ tetris::tetris()
         rotate();
         spawn(sprite);
         
+        dx = 0;
+        needsRotation = false;
+
+        // Clear screen
+        window.clear(Color::White);
+        window.draw(gridSprite);
+        
+        // Draw the sprite in correct spot
+        for(int i = 0; i < 4; i++) {
+            sprite.setPosition(current[i].x * 32 + 10 + 96, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
+            window.draw(sprite);
+        }
+        
+        // add display score here
+        
+
+        window.display(); // Update the window
+        
     }
     
 }
