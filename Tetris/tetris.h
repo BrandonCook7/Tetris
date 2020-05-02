@@ -3,7 +3,7 @@
 
 #include "game.h"
 
-class tetris : public game
+class tetris: public game
 {
 private:
     int score;
@@ -12,8 +12,8 @@ private:
     float timer; // timer
     float delay; // delay in milliseconds
     Clock clock; // clock
-
-    int grid[20][10]; // playing field
+    
+    int grid[20][10] = {0}; // playing field
     Coordinate shapes[7][4] = // different pieces
     {
         {{1,0},{1,1},{1,2},{1,3}}, // I
@@ -25,7 +25,6 @@ private:
         {{0,1},{1,1},{2,1},{1,2}}  // T
     };
     Coordinate current[4], prev[4]; // keeps track of block's current position and previous position
-    Coordinate block[4]; // holds the 4 coordinates of a block
 public:
     tetris();
     bool checkWin();
@@ -33,8 +32,8 @@ public:
     void checkLines();
     void rotate();
     void move();
-    void spawn(Sprite& sprite, int& isSquare);
+    void spawn(Sprite &sprite, int &isSquare);
     void displayScore();
 };
 
-#endif 
+#endif /* tetris_hpp */
