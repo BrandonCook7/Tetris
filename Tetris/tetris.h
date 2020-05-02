@@ -1,19 +1,21 @@
+
 #ifndef tetris_h
 #define tetris_h
 
 #include "game.h"
 
-class tetris: public game
+class tetris : public game
 {
 private:
     int score;
+    int randNum=0;
     int hasSpawned;
     bool needsRotation;
     float timer; // timer
     float delay; // delay in milliseconds
     Clock clock; // clock
-    
-    int grid[20][10] = {0}; // playing field
+
+    int grid[20][10] = { 0 }; // playing field
     Coordinate shapes[7][4] = // different pieces
     {
         {{1,0},{1,1},{1,2},{1,3}}, // I
@@ -32,7 +34,7 @@ public:
     void checkLines();
     void rotate();
     void move();
-    void spawn(Sprite &sprite, int &isSquare);
+    void spawn(Sprite& sprite, int& isSquare);
     void displayScore();
 };
 
