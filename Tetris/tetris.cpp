@@ -30,12 +30,12 @@ tetris::tetris()
     
     /* Text code. Move somewhere later
      
-     sf::Font font;
+    Font font;
     if (!font.loadFromFile("Roboto-Regular.ttf")) {
         return EXIT_FAILURE;
     }
-    sf::Text text("Hello SFML", font, 50);
-    text.setFillColor(sf::Color::Black);
+    Text text("Hello SFML", font, 50);
+    text.setFillColor(Color::Black);
     text.setPosition(400, 32);
 
      
@@ -50,19 +50,19 @@ tetris::tetris()
         timer += time;
         
         // Process events
-        sf::Event event;
+        Event event;
         while (window.pollEvent(event)) {
             
             // Close window: exit
-            if (event.type == sf::Event::Closed) {
+            if (event.type == Event::Closed) {
                 window.close();
             }
             
-            if (event.type == sf::Event::KeyPressed) {
-                if(event.key.code == sf::Keyboard::Escape) window.close();
-                if(event.key.code == sf::Keyboard::Left) dx = -1;
-                if(event.key.code == sf::Keyboard::Right) dx = 1;
-                if(event.key.code == sf::Keyboard::Up) needsRotation = true;
+            if (event.type == Event::KeyPressed) {
+                if(event.key.code == Keyboard::Escape) window.close();
+                if(event.key.code == Keyboard::Left) dx = -1;
+                if(event.key.code == Keyboard::Right) dx = 1;
+                if(event.key.code == Keyboard::Up) needsRotation = true;
             }
         }
         
@@ -151,7 +151,7 @@ void tetris::spawn(Sprite sprite) {
     
     if(hasSpawned == 0) { // check if a block has been spawned already
         int randNum = rand() % 7;
-        sprite.setTextureRect(sf::IntRect(randNum * 32,0,32,32)); // set color of sprite
+        sprite.setTextureRect(IntRect(randNum * 32,0,32,32)); // set color of sprite
         for(int i = 0; i < 4; i++) {
             current[i].x = shapes[randNum][i].x;
             current[i].y = shapes[randNum][i].y;
