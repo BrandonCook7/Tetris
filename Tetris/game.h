@@ -39,7 +39,9 @@ public:
 	void setLevel(int l) {
 		level = l;
 	}
-	void virtual displayScore();
+    void virtual displayScore() {
+        
+    }
 };
 
 #endif /* game_hpp */

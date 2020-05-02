@@ -8,7 +8,7 @@ class tetris : public game
 {
 private:
     int score;
-    int randNum=0;
+    int randNum;
     int hasSpawned;
     bool needsRotation;
     float timer; // timer
@@ -34,7 +34,7 @@ public:
     void checkLines();
     void rotate();
     void move();
-    void spawn(Sprite& sprite, int& isSquare);
+    void spawn(Sprite& sprite);
     void displayScore();
 };
 
