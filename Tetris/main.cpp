@@ -2,9 +2,7 @@
 #include "tetris.h"
 
 int main() {
-
     srand(time(0));
-    
     RenderWindow w(VideoMode(800, 800), "Main");//Creates Main Window
 
     Texture bg;
@@ -14,7 +12,7 @@ int main() {
     Sprite background(bg);
 
     Font russianFont;
-    if (!russianFont.loadFromFile("Russian-Dollmaker.ttf")) {//Loads 
+    if (!russianFont.loadFromFile("Russian-Dollmaker.ttf")) {//Loads text
         cout << "ERROR: Failed to load Russian-Dollmarker.ttf\n";
     }
 
@@ -22,7 +20,7 @@ int main() {
 
     Text subText("Press Enter to Start", russianFont, 70);
     Text ruleHeader("Rules", russianFont, 60);
-    Text rules("1. Use arrow keys to move and rotate\n2. Don't let blocks touch top\n3. Each full row completed is 100 points\n", russianFont, 40);
+    Text rules("1. Use Arrow Keys to Move\n2. Don't let blocks touch top\n3. Each full row completed is 100 points\n", russianFont, 40);
 
     //Sets all text color and position
     menuText.setFillColor(Color::White);
@@ -37,7 +35,7 @@ int main() {
     rules.setFillColor(Color::White);
     rules.setPosition(180, 520);
 
-    while (w.isOpen())
+    while (w.isOpen())//while the window is open
     {
         Event e;
         while (w.pollEvent(e))//Constantly checks for event
@@ -57,6 +55,7 @@ int main() {
         w.display();//Displays all visuals
     }
 
-    tetris test;
+    tetris test;//starts tetris game for player
+    test.displayFinalScore();//displays the score to the player
     return 0;
 }
