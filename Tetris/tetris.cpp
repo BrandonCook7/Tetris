@@ -16,14 +16,14 @@ tetris::tetris()
     // Blocks.jpg has 7 blocks of different color. Tried using just a grey scale image and setColor, but it made blocks too dark. This way allows us to change color by changing what part of the image a sprite uses
     Texture blockTexture;
     if (!blockTexture.loadFromFile("images/blocks.jpg")) {
-        return EXIT_FAILURE;
+        cout << "ERROR: Failed to load images/block.jpg!\n\n";
     }
     blockTexture.setSmooth(true);
     Sprite sprite(blockTexture);
     
     Texture gridTexture;
     if (!gridTexture.loadFromFile("images/grid.jpg")) {
-        return EXIT_FAILURE;
+        cout << "ERROR: Failed to load images/grid.jpg!\n\n";
     }
     Sprite gridSprite(gridTexture);
     
