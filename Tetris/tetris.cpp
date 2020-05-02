@@ -2,6 +2,7 @@
 
 tetris::tetris()
 {
+
     srand(time(0));
     RenderWindow window(VideoMode(320, 480), "Tetris In C++"); // creates window
     float timer = 0; // timer
@@ -45,9 +46,9 @@ tetris::tetris()
 
     while (window.isOpen())
     {
-        float time = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        timer += time;
+//        float time = clock.getElapsedTime().asSeconds();
+//        clock.restart();
+//        timer += time;
         
         // Process events
         Event event;
@@ -67,7 +68,7 @@ tetris::tetris()
         }
         
         move();
-        rotate();
+//        rotate();
         spawn(sprite);
         
         dx = 0;
@@ -82,6 +83,7 @@ tetris::tetris()
             sprite.setPosition(current[i].x * 32 + 10 + 96, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
             window.draw(sprite);
         }
+        
         
         // add display score here
         
@@ -147,7 +149,7 @@ void tetris::move() {
     }
 }
 
-void tetris::spawn(Sprite sprite) {
+void tetris::spawn(Sprite &sprite) {
     
     if(hasSpawned == 0) { // check if a block has been spawned already
         int randNum = rand() % 7;

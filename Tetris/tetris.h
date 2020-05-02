@@ -7,8 +7,8 @@ class tetris: public game
 {
 private:
     int score;
+    int hasSpawned;
     bool needsRotation;
-    bool hasSpawned;
     float timer; // timer
     float delay; // delay in milliseconds
     Clock clock; // clock
@@ -33,7 +33,7 @@ public:
     void checkLines();
     void rotate();
     void move();
-    void spawn(Sprite sprite);
+    void spawn(Sprite &sprite);
     void displayScore();
 };
 

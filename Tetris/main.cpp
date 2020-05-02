@@ -1,9 +1,12 @@
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <ctime>
 #include "tetris.h"
 
-#include <iostream>
+int main() {
+    
+    tetris test;
+    
+    
+    return 0;
+}
 
 /*
 void menu(sf::RenderWindow& window);
@@ -161,11 +164,3 @@ void menu(sf::RenderWindow& window) {
 }
 
 */
-
-int main() {
-    
-    tetris test;
-    
-    
-    return 0;
-}
