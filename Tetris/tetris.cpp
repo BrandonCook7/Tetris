@@ -48,7 +48,7 @@ tetris::tetris()
         move();
         spawn(sprite);
         if (needsRotation && randNum != 1) rotate();
-        //        if (needsRotation && randNum != 1 && (current[0].x != 0 && current[1].x != 0 && current[2].x != 0 && current[3].x != 0 && (randNum != 5 || randNum != 6) )) rotate();
+        //        if (needsRotation && randNum != 1 && (current[0].x != 0 && current[1].x != 0 && current[2].x != 0 && current[3].x != 0 && && ) rotate();
         if (timer > delay)
         {
             for (int i = 0; i < 4; i++)
@@ -58,9 +58,15 @@ tetris::tetris()
             }
             if (!checkBounds()) // block has hit bottom
             {
+                
+                if(prev[0].x == current[0].x) {
+//                    window.close();
+                    cout << "test";
+                }
+                
                 for (int i = 0; i < 4; i++) {
                     current[i].y = prev[i].y;
-                    grid[current[i].y][current[i].x] = 1;
+                    grid[current[i].y][current[i].x] = randNum + 1;
                 }
                 hasSpawned = 0;
             }
@@ -77,7 +83,7 @@ tetris::tetris()
             for (int j = 0; j < 10; j++)
             {
                 if (grid[i][j] == 0) continue;
-                sprite.setTextureRect(IntRect(grid[i][j] * 32, 0, 32, 32));
+                sprite.setTextureRect(IntRect((grid[i][j] - 1)* 32, 0, 32, 32));
                 sprite.setPosition(j * 32 + 10, i * 32 + 10);
                 window.draw(sprite);
             }

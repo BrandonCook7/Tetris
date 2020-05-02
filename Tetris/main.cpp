@@ -2,9 +2,9 @@
 #include "tetris.h"
 
 int main() {
-    
-    srand(time(0));
 
+    srand(time(0));
+    
     RenderWindow w(VideoMode(800, 800), "Main");//Creates Main Window
 
     Texture bg;
