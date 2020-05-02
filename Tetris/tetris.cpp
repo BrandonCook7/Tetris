@@ -56,10 +56,13 @@ tetris::tetris()
                 prev[i] = current[i];
                 current[i].y += 1;
             }
-            if (!checkBounds())
+            if (!checkBounds()) // block has hit bottom
             {
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++) {
                     current[i].y = prev[i].y;
+                    grid[current[i].y][current[i].x] = 1;
+                }
+                hasSpawned = 0;
             }
             timer = 0;
         }
@@ -81,11 +84,9 @@ tetris::tetris()
         
         // Draw the sprite in correct spot
         for (int i = 0; i < 4; i++) {
-            sprite.setPosition(current[i].x * 32 + 10 + 96, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
+            sprite.setPosition(current[i].x * 32 + 10, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
             window.draw(sprite);
         }
-        
-
 
         // add display score here
         window.display(); // Update the window
@@ -116,7 +117,7 @@ void tetris::checkLines()
         int count = 0;
         for (int j = 0; j < 10; j++)
         {
-            if (grid[i][j])
+            if (grid[i][j] != 0)
             {
                 count++;
             }
