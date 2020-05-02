@@ -1,68 +1,59 @@
 #include "game.h"
 #include "tetris.h"
+
 int main() {
-    sf::RenderWindow w(sf::VideoMode(800, 800), "Tetris");
+    
+    RenderWindow w(VideoMode(800, 800), "Tetris");
 
-    sf::Font russianFont;
-    russianFont.loadFromFile("Russian-Dollmaker.ttf");
-
-    sf::Texture bg;
-    if (!bg.loadFromFile("images/tetris-bg.jpg")) {
-        cout << "unable to load image tetris-bg" << endl;
+    Texture bg;
+    if (!bg.loadFromFile("images/tetris-bg-darker.jpg")) {
+        cout << "ERROR: Failed to load image tetris-bg\n";
     }
-    sf::Sprite background(bg);
-    w.draw(background);
+    Sprite background(bg);
+    
+    Font russianFont;
+    if(!russianFont.loadFromFile("Russian-Dollmaker.ttf")) {
+        cout << "ERROR: Failed to load Russian-Dollmarker.ttf\n";
+    }
+    
+    Text menuText("Tetris", russianFont, 200);
+
+    Text subText("Press Enter to Start", russianFont, 70);
+    Text ruleHeader("Rules", russianFont, 60);
+    Text rules("1. Use Arrow Keys to Move\n2. Don't let blocks touch top\n3. Blocks move faster each round\n", russianFont, 40);
+
+
+    menuText.setFillColor(Color::White);
+    menuText.setPosition(240, 70);
+
+    subText.setFillColor(Color::White);
+    subText.setPosition(225, 360);
+
+    ruleHeader.setFillColor(Color::White);
+    ruleHeader.setPosition(350, 450);
+
+    rules.setFillColor(Color::White);
+    rules.setPosition(220, 520);
 
     while (w.isOpen())
     {
         Event e;
         while (w.pollEvent(e))
         {
-            if (e.type == Event::Closed)
+            if (e.type == Event::Closed || e.key.code == Keyboard::Enter)
                 w.close();
-            if (e.type == Event::KeyPressed)
-            {
-                if (e.key.code == Keyboard::Enter)
-                    w.close();
-            }
         }
 
-        sf::Text menuText("Tetris", russianFont, 200);
-
-        sf::Text subText("Press Enter to Start", russianFont, 70);
-        sf::Text ruleHeader("Rules", russianFont, 60);
-        sf::Text rules("1. Use Arrow Keys to Move\n2. Don't let blocks touch top\n3. Blocks move faster each round\n", russianFont, 40);
-
-
-        menuText.setFillColor(sf::Color::Black);
-        menuText.setPosition(240, 70);
-
-        subText.setFillColor(sf::Color::Black);
-        subText.setPosition(225, 360);
-
-        ruleHeader.setFillColor(sf::Color::Black);
-        ruleHeader.setPosition(350, 450);
-
-        rules.setFillColor(sf::Color::Black);
-        rules.setPosition(220, 520);
-
+        w.clear(Color::White);
+        w.draw(background);
         w.draw(subText);
         w.draw(menuText);
         w.draw(ruleHeader);
         w.draw(rules);
+        
+        w.display();
     }
 
     tetris test;
     return 0;
 }
-
-/* old test menu
-void menu(sf::RenderWindow& window) {
-    sf::Font font;
-    font.loadFromFile("Roboto-Regular.ttf");
-    sf::Text menuText("Menu", font, 50);
-    menuText.setFillColor(sf::Color::Black);
-    menuText.setPosition(400, 100);
-    window.draw(menuText);
-}
-*/
