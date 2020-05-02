@@ -4,12 +4,13 @@ tetris::tetris()
 {
 
     srand(time(0));
-    RenderWindow window(VideoMode(320, 480), "Tetris In C++"); // creates window
+    RenderWindow window(VideoMode(800, 800), "Tetris In C++"); // creates window
     float timer = 0; // timer
     float delay = 0.3; // delay in milliseconds
     Clock clock; // clock
     
     hasSpawned = 0;
+    int isSquare = 0;
     
     // Load textures and sprites
     
@@ -68,8 +69,8 @@ tetris::tetris()
         }
         
         move();
-//        rotate();
-        spawn(sprite);
+        if(needsRotation && !isSquare) rotate();
+        spawn(sprite, isSquare);
         
         dx = 0;
         needsRotation = false;
@@ -80,10 +81,13 @@ tetris::tetris()
         
         // Draw the sprite in correct spot
         for(int i = 0; i < 4; i++) {
-            sprite.setPosition(current[i].x * 32 + 10 + 96, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
+            sprite.setPosition(current[i].x * 32 + 10, current[i].y * 32 + 10); // multiply by 32 so the block's dont overlap. (Each block is 32x32). Add 10 px to both values so they are within the grid. Grid image has 10px border
             window.draw(sprite);
         }
         
+        // check if block cleared level
+        
+        // if block cleared level, increase score, reset hasSpawned to 0 and isSquare to 0.
         
         // add display score here
         
@@ -125,7 +129,7 @@ void tetris::checkLines()
 }
 
 void tetris::rotate() {
-    Coordinate temp = block[1];
+    Coordinate temp = current[1];
     int x = 0, y = 0;
     
     for(int i = 0; i < 4; i++) {
@@ -149,10 +153,11 @@ void tetris::move() {
     }
 }
 
-void tetris::spawn(Sprite &sprite) {
+void tetris::spawn(Sprite &sprite, int &isSquare) {
     
     if(hasSpawned == 0) { // check if a block has been spawned already
         int randNum = rand() % 7;
+        if(randNum == 1) isSquare = 1;
         sprite.setTextureRect(IntRect(randNum * 32,0,32,32)); // set color of sprite
         for(int i = 0; i < 4; i++) {
             current[i].x = shapes[randNum][i].x;

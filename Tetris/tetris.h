@@ -33,7 +33,7 @@ public:
     void checkLines();
     void rotate();
     void move();
-    void spawn(Sprite &sprite);
+    void spawn(Sprite &sprite, int &isSquare);
     void displayScore();
 };
 
