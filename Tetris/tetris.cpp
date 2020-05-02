@@ -47,8 +47,7 @@ tetris::tetris()
         
         move();
         spawn(sprite);
-        if (needsRotation && randNum != 1) rotate();
-        //        if (needsRotation && randNum != 1 && (current[0].x != 0 && current[1].x != 0 && current[2].x != 0 && current[3].x != 0 && && ) rotate();
+        if (needsRotation && randNum != 1 && (current[0].x != 0 && current[1].x != 0 && current[2].x != 0 && current[3].x != 0 && current[0].x != 9 && current[1].x != 9 && current[2].x != 9 && current[3].x != 9)) rotate();
         if (timer > delay)
         {
             for (int i = 0; i < 4; i++)

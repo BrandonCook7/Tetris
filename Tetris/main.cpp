@@ -22,20 +22,20 @@ int main() {
 
     Text subText("Press Enter to Start", russianFont, 70);
     Text ruleHeader("Rules", russianFont, 60);
-    Text rules("1. Use Arrow Keys to Move\n2. Don't let blocks touch top\n3. Blocks move faster each round\n", russianFont, 40);
+    Text rules("1. Use arrow keys to move and rotate\n2. Don't let blocks touch top\n3. Each full row completed is 100 points\n", russianFont, 40);
 
     //Sets all text color and position
     menuText.setFillColor(Color::White);
     menuText.setPosition(240, 70);
 
     subText.setFillColor(Color::White);
-    subText.setPosition(225, 360);
+    subText.setPosition(200, 360);
 
     ruleHeader.setFillColor(Color::White);
     ruleHeader.setPosition(350, 450);
 
     rules.setFillColor(Color::White);
-    rules.setPosition(220, 520);
+    rules.setPosition(180, 520);
 
     while (w.isOpen())
     {
