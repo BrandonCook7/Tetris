@@ -210,13 +210,18 @@ void tetris::displayFinalScore()
 {
     RenderWindow endWindow(VideoMode(800, 800), "End");
     string winStatement;//creates string statement that tells whether player won or lost
-    if (gameState == 0)//based on gamestate
+    if (gameState == 0) { //based on gamestate
         winStatement = "You Lost Tetris!";
-    winStatement = "You Win Tetris!";
+    } else {
+        winStatement = "You Win Tetris!";
+    }
 
     string Score = to_string(score);//converts integer to string
-    RenderWindow w(VideoMode(800, 800), "Main");//Creates Main Window
-
+    if(score == 0) {
+        Score = "0";
+    }
+    
+    
     Texture bg;
     if (!bg.loadFromFile("images/tetris-bg-darker.jpg")) {//Loads Tetris Menu Background
         cout << "ERROR: Failed to load image tetris-bg\n";//If Failed Prints out error message
@@ -240,7 +245,7 @@ void tetris::displayFinalScore()
     pointsText.setPosition(225, 360);
 
     scoreText.setFillColor(Color::Black);
-    scoreText.setPosition(225, 360);
+    scoreText.setPosition(460, 360);
 
     while (endWindow.isOpen())//while the window is open
     {
@@ -258,4 +263,3 @@ void tetris::displayFinalScore()
         endWindow.display();//Displays all visuals
     }
 }
-
